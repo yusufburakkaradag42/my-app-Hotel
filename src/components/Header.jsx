@@ -1,11 +1,13 @@
-import React  from 'react';
-import { Box, IconButton, useBreakpointValue ,Container, HStack,Link} from '@chakra-ui/react';
-
+import React, { useEffect, useState }  from 'react';
+import { Box, IconButton, useBreakpointValue ,Container, HStack,Link, Select} from '@chakra-ui/react';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import Slider from 'react-slick';
 
 
+
 const Links = ['HOME','RESIDENCE','LAND/FARM','WORKPLACE','LAKE','HISTORIC','REST/FUN'];
+
+
 const settings = {
   dots: true,
   arrows: false,
@@ -19,6 +21,32 @@ const settings = {
 };
 
 const Header = () => {
+  const [otel,setOtel] =useState([])
+
+  const fetchOtels=  async ()=>  {
+    try {
+     const respone= await fetch('https://6405db5a40597b65de4320e7.mockapi.io/todos')
+     const data =await respone.json()
+     setOtel(data)
+     console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=> {
+
+   fetchOtels()
+  },[]
+  ) 
+
+
+
+
+
+
+
+
 
   const [slider, setSlider] = React.useState(null);
   const top = useBreakpointValue({ base: '90%', md: '50%' });
@@ -89,7 +117,7 @@ const Header = () => {
         ))}
       </Slider>  
     </Box>
-    <Container maxW='container' centerContent rounded={'12'} position="absolute" bottom="0" left="50%" transform="translateX(-50%)" p="4" bg="white">
+    <Container maxW='container.xl' centerContent rounded={'12'} position="absolute" bottom="0" left="50%" transform="translateX(-50%)" p="4" bg="white">
       <Box p={15} color={'gray.400'}>
       <HStack spacing={8} alignItems={'center'}>
         
@@ -101,7 +129,48 @@ const Header = () => {
             ))}
           </HStack>
         </HStack>
-      </Box>
+      </Box> 
+
+
+       {/* select  */}
+      <Box display={'flex'} gap={4} mt={10} justifyContent={'space-between'} >
+      <Box>
+        <Select placeholder='Rent/Sales'>
+          <option value='option1'>Option 1</option>
+          <option value='option2'>Option 2</option>
+          <option value='option3'>Option 3</option>
+        </Select>
+     </Box>
+     <Box>
+        <Select placeholder='Select option'>
+          <option value='option1'>Option 1</option>
+          <option value='option2'>Option 2</option>
+          <option value='option3'>Option 3</option>
+        </Select>
+     </Box>
+     <Box>
+        <Select placeholder='Select option'>
+          <option value='option1'>Option 1</option>
+          <option value='option2'>Option 2</option>
+          <option value='option3'>Option 3</option>
+        </Select>
+     </Box>
+     <Box>
+        <Select placeholder='Select option'>
+          <option value='option1'>Option 1</option>
+          <option value='option2'>Option 2</option>
+          <option value='option3'>Option 3</option>
+        </Select>
+     </Box>
+     {/* <Box>
+     <StarRatingComponent
+                  // name="rate"
+                  starCount={5}
+                  // value={rate / 2}
+                  editing={true}
+                />
+     </Box> */}
+     </Box>
     </Container>
  
  </>
