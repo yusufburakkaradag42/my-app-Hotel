@@ -1,11 +1,7 @@
 import React, { useEffect, useState }  from 'react';
-import { Box, IconButton, useBreakpointValue ,Container, HStack,Link, Select} from '@chakra-ui/react';
-import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+import { Box,} from '@chakra-ui/react';
 import Slider from 'react-slick';
-
-
-
-const Links = ['HOME','RESIDENCE','LAND/FARM','WORKPLACE','LAKE','HISTORIC','REST/FUN'];
+import Main from './Main';
 
 
 const settings = {
@@ -49,8 +45,7 @@ const Header = () => {
 
 
   const [slider, setSlider] = React.useState(null);
-  const top = useBreakpointValue({ base: '90%', md: '50%' });
-  const side = useBreakpointValue({ base: '30%', md: '10px' });
+ 
   const cards = [
     'https://images.unsplash.com/photo-1612852098516-55d01c75769a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
     'https://images.unsplash.com/photo-1627875764093-315831ac12f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
@@ -77,32 +72,7 @@ const Header = () => {
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
       />
 
-      <IconButton
-        aria-label="left-arrow"
-        colorScheme="messenger"
-        borderRadius="full"
-        position="absolute"
-        left={side}
-        top={top}
-        transform={'translate(0%, -50%)'}
-        zIndex={2}
-        onClick={() => slider?.slickPrev()}>
-        <BiLeftArrowAlt />
-      </IconButton>
-     
-      <IconButton
-        aria-label="right-arrow"
-        colorScheme="messenger"
-        borderRadius="full"
-        position="absolute"
-        right={side}
-        top={top}
-        transform={'translate(0%, -50%)'}
-        zIndex={2}
-        onClick={() => slider?.slickNext()}>
-        <BiRightArrowAlt />
-      </IconButton>
-   
+ 
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((url, index) => (
           <Box
@@ -116,62 +86,8 @@ const Header = () => {
           />
         ))}
       </Slider>  
-    </Box>
-    <Container maxW='container.xl' centerContent rounded={'12'} position="absolute" bottom="0" left="50%" transform="translateX(-50%)" p="4" bg="white">
-      <Box p={15} color={'gray.400'}>
-      <HStack spacing={8} alignItems={'center'}>
-        
-          <HStack 
-            spacing={10}
-            display={{ md: 'flex' }}>
-            {Links.map((link) => (
-           <Link  key={link}>{link}  </Link>
-            ))}
-          </HStack>
-        </HStack>
-      </Box> 
-
-
-       {/* select  */}
-      <Box display={'flex'} gap={4} mt={10} justifyContent={'space-between'} >
-      <Box>
-        <Select placeholder='Rent/Sales'>
-          <option value='option1'>Option 1</option>
-          <option value='option2'>Option 2</option>
-          <option value='option3'>Option 3</option>
-        </Select>
-     </Box>
-     <Box>
-        <Select placeholder='Select option'>
-          <option value='option1'>Option 1</option>
-          <option value='option2'>Option 2</option>
-          <option value='option3'>Option 3</option>
-        </Select>
-     </Box>
-     <Box>
-        <Select placeholder='Select option'>
-          <option value='option1'>Option 1</option>
-          <option value='option2'>Option 2</option>
-          <option value='option3'>Option 3</option>
-        </Select>
-     </Box>
-     <Box>
-        <Select placeholder='Select option'>
-          <option value='option1'>Option 1</option>
-          <option value='option2'>Option 2</option>
-          <option value='option3'>Option 3</option>
-        </Select>
-     </Box>
-     {/* <Box>
-     <StarRatingComponent
-                  // name="rate"
-                  starCount={5}
-                  // value={rate / 2}
-                  editing={true}
-                />
-     </Box> */}
-     </Box>
-    </Container>
+      </Box>
+      <Main otel={otel} setOtel={setOtel}/>
  
  </>
    
